@@ -23,42 +23,38 @@ app.use("/api/payments", paymentRoutes);
 app.get("/", (req, res) => {
   res.json({
     success: true,
-    message: "✅ Serveur NotchPay fonctionnel",
-    version: "3.0.0",
-    mode: process.env.NODE_ENV === 'production' ? 'LIVE' : 'TEST',
+    message: "✅ Serveur Maviance SmobilPay fonctionnel",
+    version: "4.0.0",
+    mode: process.env.NODE_ENV === 'production' ? 'LIVE' : 'STAGING',
     endpoints: {
       initialize: "POST /api/payments/initialize",
       verify: "GET /api/payments/verify/:reference",
-      webhook: "POST /api/payments/webhook",
-      webhook_notchpay: "POST /api/payments/webhook/notchpay",
+      webhook: "POST /api/payments/webhook/maviance",
       config: "GET /api/payments/config",
       health: "GET /health",
-      test_webhook: "GET /test-webhook"
+      test_payment: "GET /test-payment"
     },
-    instructions: "Le système de paiement est opérationnel"
+    instructions: "Système de paiement Maviance SmobilPay opérationnel"
   });
 });
 
-app.get("/test-webhook", (req, res) => {
+// Route de test
+app.get("/test-payment", (req, res) => {
   res.json({
-    message: "Pour tester le webhook, utilisez Postman ou curl avec :",
-    curl_command: `curl -X POST https://severbackendnotchpay.onrender.com/api/payments/webhook/notchpay \\
+    message: "Pour tester le paiement:",
+    steps: [
+      "1. Créez un utilisateur via l'app mobile",
+      "2. Utilisez le token JWT dans l'en-tête Authorization",
+      "3. POST /api/payments/initialize avec les données de paiement"
+    ],
+    example_curl: `curl -X POST https://severbackendnotchpay.onrender.com/api/payments/initialize \\
       -H "Content-Type: application/json" \\
+      -H "Authorization: Bearer <votre_token_jwt>" \\
       -d '{
-        "event": "payment.complete",
-        "data": {
-          "reference": "TRX-TEST-12345",
-          "status": "complete",
-          "amount": 2500,
-          "currency": "XAF",
-          "customer": {
-            "email": "test@example.com"
-          },
-          "metadata": {
-            "userId": "test-user-id",
-            "userEmail": "test@example.com"
-          }
-        }
+        "amount": 1000,
+        "phone": "690000000",
+        "payment_method": "mtn",
+        "description": "Test paiement"
       }'`
   });
 });
@@ -69,7 +65,8 @@ app.get("/health", (req, res) => {
     timestamp: new Date().toISOString(),
     uptime: process.uptime(),
     mode: process.env.NODE_ENV || 'development',
-    webhook_url: "https://severbackendnotchpay.onrender.com/api/payments/webhook/notchpay"
+    provider: "Maviance SmobilPay",
+    webhook_url: "https://severbackendnotchpay.onrender.com/api/payments/webhook/maviance"
   });
 });
 
@@ -95,14 +92,15 @@ app.use((err, req, res, next) => {
 
 // Démarrer le serveur
 app.listen(PORT, () => {
-  console.log(`🚀 Serveur démarré sur le port ${PORT}`);
+  console.log(`🚀 Serveur Maviance démarré sur le port ${PORT}`);
   console.log(`🔗 URL: http://localhost:${PORT}`);
   console.log(`🌍 Accessible depuis: https://severbackendnotchpay.onrender.com`);
   console.log(`📡 Mode: ${process.env.NODE_ENV || 'development'}`);
-  console.log(`🔧 Webhook NotchPay: https://severbackendnotchpay.onrender.com/api/payments/webhook/notchpay`);
+  console.log(`🔧 Webhook Maviance: https://severbackendnotchpay.onrender.com/api/payments/webhook/maviance`);
   console.log(`⚙️ Variables d'environnement chargées:`, {
     NODE_ENV: process.env.NODE_ENV,
     SUPABASE_URL: process.env.SUPABASE_URL ? '✓' : '✗',
-    NOTCHPAY_PUBLIC_KEY: process.env.NOTCHPAY_PUBLIC_KEY ? '✓' : '✗'
+    MAVIANCE_PUBLIC_KEY: process.env.MAVIANCE_PUBLIC_KEY ? '✓' : '✗',
+    MAVIANCE_SECRET_KEY: process.env.MAVIANCE_SECRET_KEY ? '✓' : '✗'
   });
 });
