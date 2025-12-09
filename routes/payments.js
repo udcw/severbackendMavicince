@@ -137,8 +137,8 @@ router.post("/initialize", authenticateUser, async (req, res) => {
         merchant: {
           number: MAVIANCE_CONFIG.merchantNumber
         },
-        callback_url: `https://severbackendnotchpay.onrender.com/api/payments/webhook/maviance`,
-        return_url: `https://severbackendnotchpay.onrender.com/api/payments/status/${reference}`
+        callback_url: `https://severbackendmavicince.onrender.com/api/payments/webhook/maviance`,
+        return_url: `https://severbackendmavicince.onrender.com/api/payments/status/${reference}`
       };
 
       console.log("📤 Envoi à Maviance API...");
