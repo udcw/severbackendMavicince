@@ -41,7 +41,7 @@
     iceberg-js "^0.8.0"
     tslib "2.8.1"
 
-"@supabase/supabase-js@^2.86.2":
+"@supabase/supabase-js@^2.38.5":
   version "2.86.2"
   resolved "https://registry.npmjs.org/@supabase/supabase-js/-/supabase-js-2.86.2.tgz"
   integrity sha512-KXoiqFf7zZhL/+lj7oBFFUvVDQ6gy03v9wQ5E++f7xiJUuqmI4DuBhrv8uFo6B2EGTQTA3vkXjbxmYIug/zfWw==
@@ -97,7 +97,7 @@ asynckit@^0.4.0:
   resolved "https://registry.npmjs.org/asynckit/-/asynckit-0.4.0.tgz"
   integrity sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==
 
-axios@^1.6.0, axios@^1.9.0:
+axios@^1.6.0:
   version "1.13.2"
   resolved "https://registry.npmjs.org/axios/-/axios-1.13.2.tgz"
   integrity sha512-VPk9ebNqPcy5lRGuSlKx752IlDatOjT9paPlm8A7yOuW2Fbvp4X3JznJtT4f0GzGLLiWE9W8onz51SqLYwzGaA==
@@ -616,13 +616,6 @@ normalize-path@^3.0.0, normalize-path@~3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/normalize-path/-/normalize-path-3.0.0.tgz"
   integrity sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==
-
-notchpay-client@0.2.0-beta:
-  version "0.2.0-beta"
-  resolved "https://registry.npmjs.org/notchpay-client/-/notchpay-client-0.2.0-beta.tgz"
-  integrity sha512-hIXfT0IrT4wmta9If637G4dc+bZRfopvkXkQM+8rICPcB1QL8eJ1g5MrPHHX1QKnXu58neu7Ml8teJnCyIyopg==
-  dependencies:
-    axios "^1.9.0"
 
 object-assign@^4:
   version "4.1.1"
